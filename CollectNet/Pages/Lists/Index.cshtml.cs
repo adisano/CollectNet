@@ -22,12 +22,22 @@ namespace CollectNet.Pages.Lists
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
-        public IList<List> List { get;set; }
+        public PaginatedList<List> List { get;set; }
 
-        public async Task OnGetAsync(string sortOrder, string searchString)
+        public async Task OnGetAsync(string sortOrder,
+            string currentFilter, string searchString, int? pageIndex)
         {
+            CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             CurrentFilter = searchString;
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
             IQueryable<List> listIQ = from s in _context.List
                                             select s;
@@ -46,7 +56,9 @@ namespace CollectNet.Pages.Lists
                     break;
             }
 
-            List = await listIQ.AsNoTracking().ToListAsync();
+            int pageSize = 3;
+            List = await PaginatedList<List>.CreateAsync(
+                listIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }
