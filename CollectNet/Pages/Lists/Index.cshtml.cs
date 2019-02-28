@@ -24,12 +24,17 @@ namespace CollectNet.Pages.Lists
 
         public IList<List> List { get;set; }
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            CurrentFilter = searchString;
 
             IQueryable<List> listIQ = from s in _context.List
                                             select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                listIQ = listIQ.Where(s => s.ListName.Contains(searchString));
+            }
 
             switch (sortOrder)
             {
