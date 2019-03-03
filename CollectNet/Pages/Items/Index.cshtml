@@ -22,6 +22,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Item[0].ItemTags)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].ListID)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,6 +40,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ItemTags)
             </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.ListID)
+            </th>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
