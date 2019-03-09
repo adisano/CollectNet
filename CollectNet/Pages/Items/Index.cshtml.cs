@@ -19,10 +19,12 @@ namespace CollectNet.Pages.Items
         }
 
         public IList<Item> Item { get;set; }
+        public List<List> List { get; set; }
 
         public async Task OnGetAsync()
         {
             Item = await _context.Item.ToListAsync();
+            List = await _context.List.ToListAsync();
         }
     }
 }

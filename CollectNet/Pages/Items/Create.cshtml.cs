@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using CollectNet.Models;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CollectNet.Pages.Items
 {
@@ -20,11 +19,19 @@ namespace CollectNet.Pages.Items
 
         public IActionResult OnGet()
         {
+            Lists = _context.List.Select(x => new SelectListItem
+            {
+                Value = x.ID.ToString(),
+                Text = x.ListName
+            }).ToList();
             return Page();
         }
 
         [BindProperty]
         public Item Item { get; set; }
+        [BindProperty]
+        public int ListID { get; set; }
+        public List<SelectListItem> Lists { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -32,8 +39,8 @@ namespace CollectNet.Pages.Items
             {
                 return Page();
             }
-            var item = _context.List.FirstOrDefault(x => x.ID == 1);
-            Item.List = item;
+
+            Item.ListID = ListID;
 
             _context.Item.Add(Item);
             await _context.SaveChangesAsync();

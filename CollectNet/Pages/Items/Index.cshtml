@@ -23,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.Item[0].ItemTags)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Item[0].ListID)
+                @Html.DisplayNameFor(model => model.List[0].ListName)
             </th>
             <th></th>
         </tr>
@@ -41,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.ItemTags)
             </td>
             <th>
-                @Html.DisplayFor(modelItem => item.ListID)
+                @Html.DisplayFor(modelItem => item.List.ListName)
             </th>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
