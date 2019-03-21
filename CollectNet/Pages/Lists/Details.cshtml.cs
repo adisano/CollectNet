@@ -19,6 +19,8 @@ namespace CollectNet.Pages.Lists
         }
 
         public List List { get; set; }
+        public Item Item { get; set; }
+        public List<Item> ListItems { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,6 +30,7 @@ namespace CollectNet.Pages.Lists
             }
 
             List = await _context.List.FirstOrDefaultAsync(m => m.ID == id);
+            ListItems = await _context.Item.Where(m => m.ListID == List.ID).ToListAsync();
 
             if (List == null)
             {

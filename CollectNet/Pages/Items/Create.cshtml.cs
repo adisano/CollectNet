@@ -24,13 +24,17 @@ namespace CollectNet.Pages.Items
                 Value = x.ID.ToString(),
                 Text = x.ListName
             }).ToList();
+
+
             return Page();
+
         }
 
         [BindProperty]
         public Item Item { get; set; }
         [BindProperty]
         public int ListID { get; set; }
+        public List List { get; set; }
         public List<SelectListItem> Lists { get; set; }
 
         public async Task<IActionResult> OnPostAsync()

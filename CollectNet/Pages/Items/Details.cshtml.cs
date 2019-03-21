@@ -31,6 +31,7 @@ namespace CollectNet.Pages.Items
             Item = await _context.Item.FirstOrDefaultAsync(m => m.ID == id);
             List = await _context.List.ToListAsync();
 
+
             if (Item == null)
             {
                 return NotFound();
