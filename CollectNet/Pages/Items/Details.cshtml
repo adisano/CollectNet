@@ -8,7 +8,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Item</h4>
+    <h4>@Html.DisplayFor(model => model.Item.ItemName)</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -33,7 +33,9 @@
             @Html.DisplayNameFor(model => model.Item.List.ListName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Item.List.ListName)
+            <a href="/Lists/Details?id=@Html.DisplayFor(model => model.Item.List.ID)">
+                @Html.DisplayFor(model => model.Item.List.ListName)
+            </a>
         </dd>
     </dl>
 </div>

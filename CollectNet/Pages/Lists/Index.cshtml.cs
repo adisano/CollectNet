@@ -43,7 +43,9 @@ namespace CollectNet.Pages.Lists
                                             select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                listIQ = listIQ.Where(s => s.ListName.Contains(searchString));
+                listIQ = listIQ.Where(s => s.ListName.Contains(searchString) ||
+                                            s.ListTags.Contains(searchString) ||
+                                            s.ListTypes.Contains(searchString));
             }
 
             switch (sortOrder)
