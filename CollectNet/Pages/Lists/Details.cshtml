@@ -33,17 +33,18 @@
             @Html.DisplayNameFor(model => model.List.ListItems)
         </dt>
         <dd class="col-sm-10">
-                @{
-                    var x = 0;
-                    foreach (var item in Model.ListItems)
-                    {
-                        <a href="/Items/Details?id=@Html.DisplayFor(model => model.ListItems[x].ID)">
+            @{
+                var x = 0;
+                foreach (var item in Model.ListItems)
+                {
+                    @Html.DisplayFor(model => model.ListItems[x].IsCollected)
+                    <a href="/Items/Details?id=@Html.DisplayFor(model => model.ListItems[x].ID)">
                         @Html.DisplayFor(model => model.ListItems[x].ItemName)
-                        </a>
-                        <p></p>
-                        x++;
-                    }
+                    </a>
+                    <p></p>
+                    x++;
                 }
+            }
         </dd>
     </dl>
 </div>

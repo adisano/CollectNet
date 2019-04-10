@@ -25,7 +25,6 @@ namespace CollectNet.Pages.Items
                 Text = x.ListName
             }).ToList();
 
-
             return Page();
 
         }
@@ -36,6 +35,9 @@ namespace CollectNet.Pages.Items
         public int ListID { get; set; }
         public List List { get; set; }
         public List<SelectListItem> Lists { get; set; }
+        [BindProperty]
+        public bool IsChecked { get; set; }
+
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -45,6 +47,12 @@ namespace CollectNet.Pages.Items
             }
 
             Item.ListID = ListID;
+
+            //this is the thingy please get this checked out
+            if (IsChecked)
+            {
+                Item.IsCollected = true;
+            }
 
             _context.Item.Add(Item);
             await _context.SaveChangesAsync();

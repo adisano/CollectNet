@@ -33,6 +33,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.List[0].ListName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].IsCollected)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -50,6 +53,9 @@
             </td>
             <th>
                 @Html.DisplayFor(modelItem => item.List.ListName)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.IsCollected)
             </th>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

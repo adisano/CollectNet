@@ -16,6 +16,7 @@ namespace CollectNet.Models
         [StringLength(50)]
         public string ItemTags { get; set; }
         public int ListID { get; set; }
+        public bool IsCollected { get; set; }
 
         public List List { get; set; }
     }

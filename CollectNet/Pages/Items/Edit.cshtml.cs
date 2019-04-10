@@ -21,6 +21,8 @@ namespace CollectNet.Pages.Items
 
         [BindProperty]
         public Item Item { get; set; }
+        [BindProperty]
+        public bool IsChecked { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -43,6 +45,11 @@ namespace CollectNet.Pages.Items
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            if (IsChecked)
+            {
+                Item.IsCollected = true;
             }
 
             _context.Attach(Item).State = EntityState.Modified;
