@@ -19,11 +19,24 @@ namespace CollectNet.Pages.Items
 
         public IActionResult OnGet()
         {
-            Lists = _context.List.Select(x => new SelectListItem
+
+
+            // Use LINQ to get list of items.
+            IQueryable<string> listQuery = from m in _context.List
+                                           orderby m.ListName
+                                           select m.ListName;
+
+            var lists = from m in _context.List
+                        where m.UserName == User.Identity.Name
+                        select m;
+
+            
+            Lists = lists.Select(x => new SelectListItem
             {
                 Value = x.ID.ToString(),
                 Text = x.ListName
             }).ToList();
+            
 
             return Page();
 
@@ -33,7 +46,7 @@ namespace CollectNet.Pages.Items
         public Item Item { get; set; }
         [BindProperty]
         public int ListID { get; set; }
-        public List List { get; set; }
+        public IList<List> List { get; set; }
         public List<SelectListItem> Lists { get; set; }
         [BindProperty]
         public bool IsChecked { get; set; }
@@ -41,14 +54,16 @@ namespace CollectNet.Pages.Items
 
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
             {
+
                 return Page();
             }
 
             Item.ListID = ListID;
-
-            //this is the thingy please get this checked out
+            Item.UserName = User.Identity.Name;
+            
             if (IsChecked)
             {
                 Item.IsCollected = true;

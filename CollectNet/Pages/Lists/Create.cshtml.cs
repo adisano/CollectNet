@@ -34,6 +34,7 @@ namespace CollectNet.Pages.Lists
             }
 
             _context.List.Add(List);
+            List.UserName = User.Identity.Name;
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

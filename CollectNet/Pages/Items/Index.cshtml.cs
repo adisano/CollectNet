@@ -23,6 +23,7 @@ namespace CollectNet.Pages.Items
         public string SearchString { get; set; }
         [BindProperty(SupportsGet = true)]
         public string SearchItem { get; set; }
+        public string UserName { get; set; }
 
         public List<List> List { get; set; }
 
